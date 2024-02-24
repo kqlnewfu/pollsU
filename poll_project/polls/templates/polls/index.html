@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utegen apai</title>
+    {% load static %}
+  <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+</head>
+<body>
+<div class="container">
+  <h1 class="title">Questions</h1>
+  {% if latest_question_list %}
+    <ul class="question-list">
+    {% for question in latest_question_list %}
+    <li class="question-item">
+        <a class="question-link" href="{% url 'polls:detail' question.id %}">
+            <span class="initial">{{ question.question_text|first }}</span>{{ question.question_text|slice:"1:" }}
+        </a>
+    </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p class="no-polls">Polls are out.</p>
+  {% endif %}
+</div>
+</body>
+</html>
+
